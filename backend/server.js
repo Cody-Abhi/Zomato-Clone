@@ -14,7 +14,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // handle preflight for all routes
+// app.use(cors(corsOptions));  handle preflight for all routes
 
 const { createUserTable } = require('./models/User');
 const { createRestaurantTable } = require('./models/Restaurant');
