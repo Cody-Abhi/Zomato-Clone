@@ -27,7 +27,8 @@ async function initDB() {
     console.log('✅ simple_users table ready');
 
   } catch (error) {
-    console.error('❌ DB initialization failed:', error.message);
+    console.error("❌ DB initialization failed:");
+    console.error(error.stack);
   }
 }
 initDB();
