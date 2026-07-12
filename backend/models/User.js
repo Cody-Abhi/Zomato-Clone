@@ -15,8 +15,8 @@ const createUserTable = async () => {
   await db.query(query);
 };
 
-// Run table creation
-createUserTable().catch(err => console.error('Error creating users table:', err.message));
+// Export table creator so server.js can call it in the right order
+module.exports.createUserTable = createUserTable;
 
 class User {
   // Create a new user
@@ -45,3 +45,4 @@ class User {
 }
 
 module.exports = User;
+module.exports.createUserTable = createUserTable;

@@ -12,7 +12,7 @@ const initTable = async () => {
   `;
   await db.query(query);
 };
-initTable().catch(err => console.error('Table init error:', err.message));
+
 
 class SimpleUser {
   static async create({ name, email }) {
@@ -23,3 +23,5 @@ class SimpleUser {
 }
 
 module.exports = SimpleUser;
+module.exports.initTable = initTable;
+

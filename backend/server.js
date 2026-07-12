@@ -5,16 +5,32 @@ const pool = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Test database connection at startup
-async function testConnection() {
+const { createUserTable } = require('./models/User');
+const { createRestaurantTable } = require('./models/Restaurant');
+const { initTable: initSimpleUserTable } = require('./models/SimpleUser');
+
+// Initialize DB: create tables in the correct dependency order
+async function initDB() {
   try {
     const [rows] = await pool.query('SELECT 1 + 1 AS connectionTest');
-    console.log('Database connection successful! Test query result:', rows[0].connectionTest);
+    console.log('✅ Database connection successful! Test result:', rows[0].connectionTest);
+
+    // 1. users table first (no dependencies)
+    await createUserTable();
+    console.log('✅ users table ready');
+
+    // 2. tables that depend on users
+    await createRestaurantTable();
+    console.log('✅ restaurants table ready');
+
+    await initSimpleUserTable();
+    console.log('✅ simple_users table ready');
+
   } catch (error) {
-    console.error('Database connection failed:', error.message);
+    console.error('❌ DB initialization failed:', error.message);
   }
 }
-testConnection();
+initDB();
 
 const cookieParser = require('cookie-parser');
 

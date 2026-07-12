@@ -17,8 +17,6 @@ const createRestaurantTable = async () => {
   await db.query(query);
 };
 
-// Run table creation
-createRestaurantTable().catch(err => console.error('Error creating restaurants table:', err.message));
 
 class Restaurant {
   // Create a new restaurant record
@@ -65,3 +63,4 @@ class Restaurant {
 }
 
 module.exports = Restaurant;
+module.exports.createRestaurantTable = createRestaurantTable;
