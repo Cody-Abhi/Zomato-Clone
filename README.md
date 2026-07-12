@@ -1,24 +1,39 @@
-# Zomato-Clone
+# Zomato Clone — Full Stack Monorepo
 
-A full-stack food ordering app inspired by Zomato, built with React, Vite, Tailwind CSS, and Node.js/Express.
+A full-stack food delivery web app built with React (Vite) + Node.js/Express + MySQL.
 
-## Features
-- Browse restaurants and food categories
-- Search and view restaurant details
-- Add items to cart and place orders
-- Authentication and profile flows
-- Payment and order confirmation flow
+## Project Structure
 
-## Tech Stack
-- Frontend: React, Vite, Tailwind CSS
-- Backend: Node.js, Express
-- Database: MongoDB
+```
+project/
+├── frontend/        # React + Vite (deploy to Vercel)
+├── backend/         # Express + MySQL (deploy to Railway)
+├── docs/            # Architecture & deployment notes
+└── README.md
+```
 
-## Getting Started
-1. Install dependencies:
-   - `npm install`
-   - `cd backend && npm install`
-2. Start the frontend:
-   - `npm run dev`
-3. Start the backend:
-   - `cd backend && npm run dev`
+## Quick Start
+
+### Backend
+```bash
+cd backend
+cp .env.example .env   # fill in your values
+npm install
+npm run dev            # runs on http://localhost:5000
+```
+
+### Frontend
+```bash
+cd frontend
+cp .env.example .env   # VITE_API_URL= (empty for dev proxy)
+npm install
+npm run dev            # runs on http://localhost:5173
+```
+
+## Deployment
+
+| Layer    | Platform | Notes |
+|----------|----------|-------|
+| Frontend | Vercel   | Set `VITE_API_URL` to your Railway backend URL |
+| Backend  | Railway  | Set `CLIENT_URL` to your Vercel frontend URL |
+| Database | Railway MySQL | Connection via `MYSQL_URL` or individual `DB_*` vars |

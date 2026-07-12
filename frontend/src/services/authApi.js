@@ -15,11 +15,12 @@ import axios from "axios";
 //   getProfile()                          → GET  /api/auth/profile
 // -------------------------------------------------------
 
-// Create an Axios instance with our backend URL as the base.
-// Because we added a Vite proxy ("/api" → "http://localhost:5000"),
-// we can use "/api/auth" as the base and Vite will forward it.
+// In development: VITE_API_URL is empty → Vite proxy forwards /api → localhost:5000
+// In production:  VITE_API_URL=https://your-app.up.railway.app (set on Vercel)
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+
 const api = axios.create({
-  baseURL: "/api/auth",
+  baseURL: `${BASE_URL}/api/auth`,
 });
 
 // Request interceptor — runs automatically before every request is sent.
